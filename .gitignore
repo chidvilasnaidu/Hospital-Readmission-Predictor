@@ -1,5 +1,9 @@
 venv/
 __pycache__/
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0574688 (Add ML model files and update main.py)
 *.joblib
 .env
 .ipynb_checkpoints
