@@ -1,18 +1,10 @@
 import streamlit as st
-import base64
 import joblib
 import numpy as np
 import pandas as pd
 
 # PAGE CONFIG (must be first)
 st.set_page_config(page_title="Medical Prediction App", layout="wide")
-
-# ---------- LOAD BACKGROUND ----------
-def get_base64(file):
-    with open(file, "rb") as f:
-        return base64.b64encode(f.read()).decode()
-
-img = get_base64("IMGs/BG.png")
 
 # ---------- LOAD MODEL & LABEL ENCODER ----------
 @st.cache_resource
@@ -62,7 +54,6 @@ st.divider()
 # ---------- PREDICT ----------
 if st.button("Predict Readmission Risk"):
 
-    # Validate all dropdowns are filled
     required_fields = {
         "Age Group": age,
         "Glucose Test": glucose_test,
@@ -79,7 +70,6 @@ if st.button("Predict Readmission Risk"):
     if missing:
         st.warning(f"Please fill in: {', '.join(missing)}")
     else:
-        # Build a single-row DataFrame matching the training column order
         input_df = pd.DataFrame([{
             "age":               age,
             "time_in_hospital":  int(time_in_hospital),
@@ -99,22 +89,15 @@ if st.button("Predict Readmission Risk"):
             "diabetes_med":      diabetes_med,
         }])
 
-        # Run through the full pipeline (encoding + scaling + model)
         prediction_encoded = pipeline.predict(input_df)[0]
-
-       
-        # Decode label (0/1 -> yes/no)
         prediction_label = le.inverse_transform([prediction_encoded])[0]
 
-        # Show result
         st.divider()
         if prediction_label == "yes":
             st.error("🔴 **High Risk — Patient is likely to be readmitted**")
         else:
             st.success("🟢 **Low Risk — Patient is unlikely to be readmitted**")
 
-
-        # Show input summa
         with st.expander("View Input Summary"):
             rows = ""
             for col, val in input_df.iloc[0].items():
@@ -134,94 +117,97 @@ if st.button("Predict Readmission Risk"):
                 unsafe_allow_html=True,
             )
 
-
 # ---------- STYLING ----------
 st.markdown(
-    f"""
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+"""
+<style>
 
-    * {{ box-sizing: border-box; }}
-    #MainMenu, footer {{ visibility: hidden; }}
-    [data-testid="stHeader"], div[data-testid="stToolbar"], div[data-testid="stDecoration"] {{ display: none !important; }}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
-    .stApp {{
-        background: linear-gradient(rgba(2,8,20,0.78), rgba(2,8,20,0.82)), url("data:image/png;base64,{img}");
-        background-size: cover; background-position: center; background-repeat: no-repeat;
-        font-family: 'DM Sans', sans-serif;
-    }}
-    .block-container {{ padding-top: 110px !important; padding-bottom: 120px !important; max-width: 95% !important; padding-left: 40px !important; padding-right: 40px !important; }}
+* { box-sizing: border-box; }
 
-    h1, h2, h3, h4 {{ color: white !important; font-family: 'DM Sans', sans-serif !important; letter-spacing: -0.3px; }}
-    h1 {{ font-size: 4rem !important; font-weight: 700 !important; }}
-    h3 {{ font-size: 2.1rem !important; font-weight: 600 !important; color: #94d4f5 !important; text-transform: uppercase; letter-spacing: 1px; }}
-    p, span, div, label {{ color: rgba(255,255,255,0.85) !important; font-family: 'DM Sans', sans-serif !important; }}
-    .stMarkdown p {{ color: rgba(255,255,255,0.6) !important; font-size: 0.95rem !important; }}
-    hr {{ border-color: rgba(255,255,255,0.08) !important; margin: 20px 0 !important; }}
+#MainMenu, footer { visibility: hidden; }
 
-    [data-testid="stWidgetLabel"] label, .stNumberInput label, .stSelectbox label, [data-testid="stWidgetLabel"] p {{
-        color: rgba(255,255,255,0.70) !important; font-size: 13px !important; font-weight: 500 !important;
-        letter-spacing: 0.2px !important; margin-bottom: 4px !important;
-    }}
-    .stNumberInput, .stNumberInput > div {{ width: 100% !important; }}
-    div[data-baseweb="input"] {{ background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.13) !important; border-radius: 8px !important; height: 42px !important; width: 100% !important; }}
-    div[data-baseweb="input"] input {{ background: transparent !important; border: none !important; color: white !important; font-size: 14px !important; height: 40px !important; font-family: 'DM Sans', sans-serif !important; }}
-    div[data-baseweb="input"]:focus-within {{ border-color: rgba(56,189,248,0.5) !important; box-shadow: 0 0 0 2px rgba(56,189,248,0.08) !important; }}
-    div[data-baseweb="input"] button {{ color: rgba(255,255,255,0.5) !important; background: transparent !important; border: none !important; }}
-    div[data-baseweb="input"] button:hover {{ color: #38bdf8 !important; background: rgba(56,189,248,0.1) !important; }}
+[data-testid="stHeader"],
+div[data-testid="stToolbar"],
+div[data-testid="stDecoration"] { display: none !important; }
 
-    .stSelectbox, .stSelectbox > div, div[data-baseweb="select"] {{ width: 100% !important; }}
-    div[data-baseweb="select"] > div {{ background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.13) !important; border-radius: 8px !important; height: 42px !important; min-height: 42px !important; display: flex !important; align-items: center !important; width: 100% !important; }}
-    div[data-baseweb="select"] > div:focus-within {{ border-color: rgba(56,189,248,0.5) !important; box-shadow: 0 0 0 2px rgba(56,189,248,0.08) !important; }}
-    div[data-baseweb="select"] span, div[data-baseweb="select"] [data-testid="stMarkdownContainer"] p {{ color: white !important; font-size: 14px !important; font-family: 'DM Sans', sans-serif !important; }}
-    div[data-baseweb="select"] svg {{ fill: rgba(255,255,255,0.5) !important; }}
+.stApp {
+    background: #000000;
+    font-family: 'DM Sans', sans-serif;
+}
 
-    [data-baseweb="popover"] ul {{ background: #0b1a2e !important; border: 1px solid rgba(255,255,255,0.12) !important; border-radius: 8px !important; padding: 4px !important; }}
-    [data-baseweb="popover"] li {{ color: rgba(255,255,255,0.85) !important; font-size: 13.5px !important; border-radius: 6px !important; padding: 8px 12px !important; }}
-    [data-baseweb="popover"] li:hover {{ background: rgba(56,189,248,0.15) !important; color: white !important; }}
+.block-container {
+    padding-top: 110px !important;
+    padding-bottom: 120px !important;
+    max-width: 95% !important;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+}
 
-    [data-testid="column"] {{ background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 24px 28px !important; backdrop-filter: blur(8px); }}
+h1, h2, h3, h4 {
+    color: white !important;
+}
 
-    div[data-testid="stButton"] > button {{ display: block; margin: 0 auto; background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white !important; font-family: 'DM Sans', sans-serif !important; font-size: 15px !important; font-weight: 600 !important; letter-spacing: 0.5px; padding: 12px 48px !important; border: none !important; border-radius: 10px !important; cursor: pointer; transition: background 0.3s ease, transform 0.15s ease, box-shadow 0.3s ease !important; box-shadow: 0 4px 20px rgba(14,165,233,0.3); }}
-    div[data-testid="stButton"] > button:hover {{ background: linear-gradient(135deg, #22c55e, #16a34a) !important; box-shadow: 0 6px 28px rgba(34,197,94,0.45) !important; transform: translateY(-2px) !important; color: white !important; }}
-    div[data-testid="stButton"] > button:active {{ transform: translateY(0px) !important; box-shadow: 0 2px 12px rgba(34,197,94,0.3) !important; }}
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 48px;
+    background: rgba(2, 10, 24, 0.85);
+    backdrop-filter: blur(16px);
+}
 
-    [data-testid="stAlert"] {{ background: rgba(34,197,94,0.12) !important; border: 1px solid rgba(34,197,94,0.35) !important; border-radius: 10px !important; color: white !important; }}
+.logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 20px;
+    font-weight: 700;
+    color: white !important;
+}
 
-    /* ── Expander ── */
-    [data-testid="stExpander"] {{ background: rgba(255,255,255,0.04) !important; border: 1px solid rgba(255,255,255,0.10) !important; border-radius: 10px !important; }}
-    [data-testid="stExpander"] summary {{ color: rgba(255,255,255,0.75) !important; font-size: 13.5px !important; }}
-    [data-testid="stExpander"] svg {{ fill: rgba(255,255,255,0.5) !important; }}
+.logo span {
+    color: #38bdf8 !important;
+}
 
-    /* ── Dataframe / table ── */
-    [data-testid="stDataFrame"], [data-testid="stDataFrame"] > div, .stDataFrame iframe {{ background: transparent !important; }}
-    [data-testid="stDataFrame"] div[data-testid="stDataFrameResizable"] {{ background: rgba(10,20,40,0.85) !important; border-radius: 8px !important; border: 1px solid rgba(255,255,255,0.10) !important; }}
-    .dvn-scroller {{ background: rgba(10,20,40,0.85) !important; }}
-    .glideDataEditor {{ background: rgba(10,20,40,0.85) !important; }}
-    canvas {{ filter: invert(0) !important; }}
+.site-header nav a {
+    margin-left: 28px;
+    color: rgba(255,255,255,0.65) !important;
+    text-decoration: none;
+}
 
-    .site-header {{ position: fixed; top: 0; left: 0; width: 100%; z-index: 9999; display: flex; justify-content: space-between; align-items: center; padding: 14px 48px; background: rgba(2, 10, 24, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.08); }}
-    .logo {{ font-family: 'Space Mono', monospace; font-size: 20px; font-weight: 700; color: white !important; letter-spacing: -0.5px; }}
-    .logo span {{ color: #38bdf8 !important; }}
-    .site-header nav a {{ margin-left: 28px; color: rgba(255,255,255,0.65) !important; text-decoration: none; font-size: 13.5px; font-weight: 500; letter-spacing: 0.2px; transition: color 0.2s ease; }}
-    .site-header nav a:hover {{ color: #38bdf8 !important; }}
+.site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    background: rgba(2, 10, 24, 0.85);
+    backdrop-filter: blur(16px);
+    color: rgba(255,255,255,0.4) !important;
+    font-size: 12.5px;
+}
 
-    .site-footer {{ position: fixed; bottom: 0; left: 0; width: 100%; text-align: center; padding: 10px; background: rgba(2, 10, 24, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-top: 1px solid rgba(255,255,255,0.07); color: rgba(255,255,255,0.4) !important; font-size: 12.5px; }}
-    </style>
+</style>
 
-    <div class="site-header">
-        <div class="logo">Med<span>Portal</span></div>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Contact</a>
-        </nav>
-    </div>
+<div class="site-header">
+<div class="logo">Med<span>Portal</span></div>
+<nav>
+<a href="#">Home</a>
+<a href="#">About</a>
+<a href="#">Services</a>
+<a href="#">Contact</a>
+</nav>
+</div>
 
-    <div class="site-footer">
-        This prediction is based on a ML model and is not medical advice. Please consult a healthcare professional or contact a hospital in case of emergency.
-    </div>
-    """,
-    unsafe_allow_html=True
+<div class="site-footer">
+This prediction is based on a ML model and is not medical advice. Please consult a healthcare professional or contact a hospital in case of emergency.
+</div>
+""",
+unsafe_allow_html=True
 )
