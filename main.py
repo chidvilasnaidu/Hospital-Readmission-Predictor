@@ -3,7 +3,7 @@ import joblib
 import numpy as np
 import pandas as pd
 
-# PAGE CONFIG (must be first)
+
 st.set_page_config(page_title="Medical Prediction App", layout="wide")
 
 # ---------- LOAD MODEL & LABEL ENCODER ----------
