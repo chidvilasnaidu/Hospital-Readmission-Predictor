@@ -6,7 +6,7 @@ import pandas as pd
 
 st.set_page_config(page_title="Medical Prediction App", layout="wide")
 
-# ---------- LOAD MODEL & LABEL ENCODER ----------
+
 @st.cache_resource
 def load_model():
     pipeline = joblib.load("hospital_readmission_pipeline.pkl")
@@ -15,7 +15,6 @@ def load_model():
 
 pipeline, le = load_model()
 
-# ---------- UI ----------
 st.title("Hospital Readmission Prediction")
 st.write("Predict the likelihood of patient readmission based on clinical information.")
 st.divider()
