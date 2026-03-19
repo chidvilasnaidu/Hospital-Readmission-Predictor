@@ -33,7 +33,6 @@ with col1:
     diag_2        = st.selectbox("Secondary Diagnosis",                       ["", "Circulatory", "Respiratory", "Digestive", "Other", "Diabetes", "Injury", "Musculoskeletal", "Missing"])
     diag_3        = st.selectbox("Additional Secondary Diagnosis",            ["", "Circulatory", "Respiratory", "Digestive", "Other", "Diabetes", "Injury", "Musculoskeletal", "Missing"])
 
-# RIGHT SIDE
 with col2:
     st.subheader("Hospital Visit Details")
     medical_specialty = st.selectbox(
