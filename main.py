@@ -21,7 +21,7 @@ st.divider()
 
 col1, col2 = st.columns(2, gap="large")
 
-# LEFT SIDE
+
 with col1:
     st.subheader("Patient Information")
     age           = st.selectbox("Enter Age Group",                           ["", "[40-50)", "[50-60)", "[60-70)", "[70-80)", "[80-90)", "[90-100)"])
