@@ -49,7 +49,7 @@ with col2:
 
 st.divider()
 
-# ---------- PREDICT ----------
+
 if st.button("Predict Readmission Risk"):
 
     required_fields = {
