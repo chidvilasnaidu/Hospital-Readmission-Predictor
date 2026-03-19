@@ -115,7 +115,7 @@ if st.button("Predict Readmission Risk"):
                 unsafe_allow_html=True,
             )
 
-# ---------- STYLING ----------
+
 st.markdown(
 """
 <style>
