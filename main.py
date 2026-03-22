@@ -25,7 +25,7 @@ col1, col2 = st.columns(2, gap="large")
 with col1:
     st.subheader("Patient Information")
     age           = st.selectbox("Enter Age Group",                           ["", "[40-50)", "[50-60)", "[60-70)", "[70-80)", "[80-90)", "[90-100)"])
-    glucose_test  = st.selectbox("Glucose Test",                              ["", "normal", "high", "no"])
+    glucose_test  = st.selectbox("Glucose Test",["", "normal", "high", "no"])
     A1Ctest       = st.selectbox("A1C Test (Apolipoprotein Test)",            ["", "normal", "high", "no"])
     change        = st.selectbox("Change in diabetes medication?",            ["", "yes", "no"])
     diabetes_med  = st.selectbox("Diabetes medication prescribed?",           ["", "yes", "no"])
