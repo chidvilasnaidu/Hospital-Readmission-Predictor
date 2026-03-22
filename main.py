@@ -39,7 +39,7 @@ with col2:
         "Medical Specialty",
         ["", "Not specified", "Cardiology", "Surgery", "InternalMedicine", "Other", "Emergency/Trauma", "Family/GeneralPractice"]
     )
-    time_in_hospital  = st.number_input("Days spent in hospital",             min_value=1,  max_value=14, value=1)
+    time_in_hospital  = st.number_input("Days spent in hospital",  min_value=1,  max_value=14, value=1)
     n_lab_procedures  = st.number_input("Number of laboratory procedures",    min_value=0,  value=0)
     n_procedures      = st.number_input("Number of procedures during stay",   min_value=0,  value=0)
     n_medications     = st.number_input("Number of medications administered", min_value=0,  value=0)
