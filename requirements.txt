@@ -5,6 +5,5 @@ scikit-learn
 joblib
 
 hugging face
-plot
 
 
