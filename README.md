@@ -22,6 +22,7 @@ This app uses a trained **scikit-learn pipeline** to predict hospital readmissio
 > ⚠️ This prediction is based on a ML model and is **not medical advice**.
 
 ---
+Lanchain
 
 ## 🧠 Features
 
