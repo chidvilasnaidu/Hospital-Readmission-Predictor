@@ -19,7 +19,7 @@ A machine learning web application that predicts the likelihood of a diabetic pa
 
 This app uses a trained **scikit-learn pipeline** to predict hospital readmission risk for diabetic patients. It takes patient demographics, diagnoses, and hospital visit details as input and outputs a **High Risk** or **Low Risk** prediction.
 
-> ⚠️ This prediction is based on a ML model and is **not medical advice**. Only for EDucation
+> ⚠️ This prediction is based on a ML model and is **not medical advice**. Only for EDucation purpose
 
 ---
 
