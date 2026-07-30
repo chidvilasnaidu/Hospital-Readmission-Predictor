@@ -7,7 +7,7 @@ A machine learning web application that predicts the likelihood of a diabetic pa
 [![Streamlit](https://img.shields.io/badge/Streamlit-App-red?logo=streamlit)](https://streamlit.io/)
 [![Docker](https://img.shields.io/badge/Docker-Containerized-blue?logo=docker)](https://www.docker.com/)
 
----
+----
 
 ## 🚀 Live Demo
 
