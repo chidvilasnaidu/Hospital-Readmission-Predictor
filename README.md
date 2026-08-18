@@ -114,7 +114,7 @@ The model was trained on the **Diabetes 130-US Hospitals (1999–2008)** dataset
 
 ---
 
-## 👤 Author
+##  Author
 
 **Chidvilas Naidu**
 - 🤗 [Hugging Face](https://huggingface.co/chidvilasnaidu)
