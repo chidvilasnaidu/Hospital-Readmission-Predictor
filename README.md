@@ -1,4 +1,4 @@
-# 🏥 Hospital Readmission Predictor 
+# Hospital Readmission Predictor 
 
 A machine learning web application that predicts the likelihood of a diabetic patient being readmitted to the hospital based on clinical and visit information.
 
@@ -74,7 +74,7 @@ Hospital-Readmission-Predictor/
 
 ---
 
-## ⚙️ Run Locally
+## Run Locally
 
 ### With Python
 
@@ -96,7 +96,7 @@ Then open **http://localhost:8501** in your browser.
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Python 3.13.5**
 - **Streamlit** — Web UI
