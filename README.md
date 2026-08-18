@@ -108,7 +108,7 @@ Then open **http://localhost:8501** in your browser.
 
 ---
 
-## 📊 Dataset
+##  Dataset
 
 The model was trained on the **Diabetes 130-US Hospitals (1999–2008)** dataset, which contains over 100,000 hospital admissions for diabetic patients.
 
