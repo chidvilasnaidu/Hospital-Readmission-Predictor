@@ -10,11 +10,11 @@ A machine learning web application that predicts the likelihood of a diabetic pa
 
 ## 🚀 Live Demo
 
-👉 **[Try it on Hugging Face Spaces](https://huggingface.co/spaces/chidvilasnaidu/Hospital-Readmission-Predictor)**
+ **[Try it on Hugging Face Spaces](https://huggingface.co/spaces/chidvilasnaidu/Hospital-Readmission-Predictor)**
 
 ---
 
-## 📌 About
+##  About
 
 This app uses a trained **scikit-learn pipeline** to predict hospital readmission risk for diabetic patients. It takes patient demographics, diagnoses, and hospital visit details as input and outputs a **High Risk** or **Low Risk** prediction.
 
@@ -23,7 +23,7 @@ This app uses a trained **scikit-learn pipeline** to predict hospital readmissio
 ---
 
 
-## 🧠 Features
+##  Features
 
 - Predicts readmission risk as **High Risk 🔴** or **Low Risk 🟢**
 - Clean, responsive dark-themed UI built with Streamlit
