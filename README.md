@@ -33,7 +33,7 @@ This app uses a trained **scikit-learn pipeline** to predict hospital readmissio
 
 ---
 
-## 📥 Input Features
+## Input Features
 
 | Feature | Description |
 |---|---|
