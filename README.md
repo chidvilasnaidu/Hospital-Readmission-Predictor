@@ -122,6 +122,6 @@ The model was trained on the **Diabetes 130-US Hospitals (1999–2008)** dataset
 
 ---
 
-## 📄 License
+##  License
 
 This project is for educational purposes only. Not intended for clinical use.
