@@ -1,4 +1,4 @@
-# Hospital Readmission Predictor 
+# Hospital Readmission Predictor m
 
 A machine learning web application that predicts the likelihood of a diabetic patient being readmitted to the hospital based on clinical and visit information.
 
